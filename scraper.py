@@ -1,6 +1,5 @@
 import os
 import glob
-import time
 import logging
 import pattern.web
 import pages_scrape
@@ -8,6 +7,7 @@ import mongo_connection
 from pymongo import MongoClient
 from ConfigParser import ConfigParser
 from apscheduler.scheduler import Scheduler
+
 
 def scrape_func(address, website, COLL):
     """
@@ -25,18 +25,28 @@ def scrape_func(address, website, COLL):
     COLL : String
             Collection within MongoDB that holds the scraped data.
     """
-
     #Setup the database
     connection = MongoClient()
     db = connection.event_scrape
     collection = db[COLL]
 
     #Scrape the RSS feed
-    results = pattern.web.Newsfeed().search(address, count=100, cached=False)
+    try:
+        results = pattern.web.Newsfeed().search(address, count=100,
+                                                cached=False)
+    except Exception, e:
+        print 'There was an error. Check the log file for more information.'
+        logger.warning('Problem fetching RSS feed for {}. {}'.format(address,
+                                                                     e))
     logger.info('There are {} results from {}'.format(len(results), website))
     #Pursue each link in the feed
     for result in results:
-        text = pages_scrape.scrape(result.url, result.title)
+        if website == 'xinhua':
+            page_url = result.url.encode('ascii')
+            page_url = page_url.replace('"', '')
+        else:
+            page_url = result.url
+        text = pages_scrape.scrape(page_url)
         entry_id = mongo_connection.add_entry(collection, text, result.title,
                                               result.url, result.date, website)
         if entry_id:
@@ -47,7 +57,8 @@ def scrape_func(address, website, COLL):
                                                                     entry_id))
     logger.info('Scrape of {} finished'.format(website))
 
-def call_scrape_func(siteList):
+
+def call_scrape_func(siteList, db_collection):
     """
     Helper function to iterate over a list of RSS feeds and scrape each.
 
@@ -55,12 +66,13 @@ def call_scrape_func(siteList):
     ----------
 
     siteList : dictionary
-                Dictionary of sites, with a nickname as the key and RSS URL 
+                Dictionary of sites, with a nickname as the key and RSS URL
                 as the value.
     """
     for website in siteList:
-        scrape_func(siteList[website], website)
+        scrape_func(siteList[website], website, db_collection)
     logger.info('Completed full scrape.')
+
 
 def parse_config():
     """Function to parse the config file."""
@@ -95,13 +107,14 @@ if __name__ == '__main__':
     logger = logging.getLogger('scraper_log')
     logger.setLevel(logging.INFO)
 
-    fh = logging.FileHandler('scraping_log.log')
+    fh = logging.FileHandler('scraping_log.log', 'w')
     formatter = logging.Formatter('%(levelname)s %(asctime)s: %(message)s')
     fh.setFormatter(formatter)
 
     logger.addHandler(fh)
     logger.info('Running')
 
+    print 'Running. See log file for further information.'
     #Get the info from the config
     db_collection, whitelist_file = parse_config()
 
@@ -113,15 +126,15 @@ if __name__ == '__main__':
     except IOError:
         print 'There was an error. Check the log file for more information.'
         logger.warning('Could not open URL whitelist file.')
-    
+
     #Line to aid in debugging
-    #call_scrape_func(to_scrape)
+    call_scrape_func(to_scrape, db_collection)
 
     #Run the `scrape_func` once each hour
-    sched = Scheduler()
-    sched.add_interval_job(call_scrape_func, args=[to_scrape, db_collection],
-                           hours=1)
-    sched.start()
-    while True:
-        time.sleep(10)
-    sched.shutdown()
+#    sched = Scheduler()
+#    sched.add_interval_job(call_scrape_func, args=[to_scrape, db_collection],
+#                           hours=1)
+#    sched.start()
+#    while True:
+#        time.sleep(10)
+#    sched.shutdown()
