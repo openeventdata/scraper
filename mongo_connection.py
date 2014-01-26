@@ -10,7 +10,8 @@ def add_entry(collection, text, title, url, date, website):
     Parameters
     ----------
 
-    collection : 
+    collection : pymongo Collection.
+                    Collection within MongoDB that in which results are stored.
 
     text : String.
             Text from a given webpage.
