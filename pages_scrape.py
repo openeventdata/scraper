@@ -32,7 +32,7 @@ def scrape(url):
         #And keep only the good paragraphs
         for par in paragraphs:
             if par['class'] == 'good':
-                text += par['text']
+                text += par['text'] + ' '
         return text
     #Generic error catching is bad
     except Exception, e:
