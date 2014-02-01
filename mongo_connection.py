@@ -1,4 +1,4 @@
-import time
+import datetime
 
 
 def add_entry(collection, text, title, url, date, website):
@@ -37,7 +37,7 @@ def add_entry(collection, text, title, url, date, website):
                 "title": title,
                 "source": website,
                 "date": date,
-                "date_added": time.strftime("%c"),
+                "date_added": datetime.datetime.utcnow(),
                 "content": text,
                 "stanford": 0}
     if collection.find_one({"url": url}):
