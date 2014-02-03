@@ -15,6 +15,13 @@ bbc,http://feeds.bbci.co.uk/news/world/rss.xml
 ap,http://hosted2.ap.org/atom/APDEFAULT/cae69a7523db45408eeb2b3a98c0c9c5
 upi,http://rss.upi.com/news/emerging_threats.rss
 xinhua,http://www.xinhuanet.com/english/rss/worldrss.xml
+voa_all,http://www.voanews.com/api/epiqq
+voa_africa,http://www.voanews.com/api/z-$otevtiq
+voa_asia,http://www.voanews.com/api/zo$o_egviy
+voa_me,http://www.voanews.com/api/zr$opeuvim
+voa_euro,http://www.voanews.com/api/zj$oveytit
+voa_am,http://www.voanews.com/api/zoripegtim
+voa_news,http://www.voanews.com/api/zji-veyj-v
 france24_americas,http://www.france24.com/en/americas/rss/
 france24_me,http://www.france24.com/en/middle-east/rss
 france24_asiap,http://www.france24.com/en/asia-pacific/rss/
