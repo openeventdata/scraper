@@ -24,7 +24,7 @@ assuming, of course, that you wish to use the configuration seen in the
 specify the path to the file of URLs and the MongoDB collection that you want
 to used.
 
-The program will run once an hour and will pull from the RSS feed specified in
+The program will run once an hour and will pull from the RSS feeds specified in
 the URL file.
 
 ###Contributing
