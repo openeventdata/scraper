@@ -129,13 +129,13 @@ if __name__ == '__main__':
         logger.warning('Could not open URL whitelist file.')
 
     #Line to aid in debugging
-    call_scrape_func(to_scrape, db_collection)
+    #call_scrape_func(to_scrape, db_collection)
 
     #Run the `scrape_func` once each hour
-#    sched = Scheduler()
-#    sched.add_interval_job(call_scrape_func, args=[to_scrape, db_collection],
-#                           hours=1)
-#    sched.start()
-#    while True:
-#        time.sleep(10)
-#    sched.shutdown()
+    sched = Scheduler()
+    sched.add_interval_job(call_scrape_func, args=[to_scrape, db_collection],
+                           hours=1)
+    sched.start()
+    while True:
+        time.sleep(10)
+    sched.shutdown()
