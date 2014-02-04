@@ -1,0 +1,7 @@
+APScheduler==2.1.2
+Pattern==2.6
+jusText==2.1.0
+lxml==3.3.0
+pymongo==2.6.3
+requests==2.2.1
+wsgiref==0.1.2

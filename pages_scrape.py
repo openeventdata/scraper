@@ -31,8 +31,8 @@ def scrape(url):
                                      justext.get_stoplist('English'))
         #And keep only the good paragraphs
         for par in paragraphs:
-            if par['class'] == 'good':
-                text += par['text'] + ' '
+            if not par.is_boilerplate:
+                text += par.text + ' '
         return text
     #Generic error catching is bad
     except Exception, e:
