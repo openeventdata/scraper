@@ -24,7 +24,7 @@ def scrape(url):
     text = ''
     try:
         headers = {'User-Agent':
-                   "Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36"}
+                   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36"}
         page = requests.get(url, headers=headers)
         #Use justext to pull out the relevant info
         paragraphs = justext.justext(page.content,
