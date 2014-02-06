@@ -45,9 +45,6 @@ def scrape_func(address, website, COLL):
         if website == 'xinhua':
             page_url = result.url.encode('ascii')
             page_url = page_url.replace('"', '')
-        if website == 'haaretz':
-            page_url = result.url.encode('ascii')
-            page_url = page_url.replace('"', '')
         if website == 'upi':
             page_url = result.url.encode('ascii')
             text = pages_scrape.scrape(page_url)
