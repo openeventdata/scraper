@@ -17,13 +17,13 @@ Make sure you have MongoDB [installed](http://docs.mongodb.org/manual/installati
 and type `mongod` at the terminal to begin the instance. MongoDB doesn't require you to prepare
 the collection or database ahead of time, so when you run the program it should automatically
 create a database called `event_scrape` with a collection called `stories`. Once you've run  `python scraper.py`, 
-you can verify that the stories are in the Mongo database by opening a new terminal wind and typing `mongo`. NOTE: 
-the scraper runs once every hour, meaning that stories may not immediately appear. To make sure that stories have been 
-scraped, comment out the scheduling part at the end of `scraper.py` and uncomment `call_scrape_func`. That will force an
-immediate scraping.
-
-From inside Mongo, type `show dbs` to verify that there's a database called `event_scrape`. Type `use event_scrape` and 
-`show collections` to make sure there's a `stories` collection. Typing  `db.news_stories.find()` will show you the first 20 entries.
+you can verify that the stories are in the Mongo database by opening a new terminal window and typing `mongo`. NOTE: 
+the scraper runs once every hour, meaning that stories may not immediately appear in your database. To force immediate scraping,
+ comment out the scheduling part at the end of `scraper.py` and uncomment `call_scrape_func`. 
+ 
+To interface with Mongo, enter `mongo` at the command line. From inside Mongo, type `show dbs` to verify that there's a database called `event_scrape`. 
+Enter the database with `use event_scrape` and type `show collections` to make sure there's a `stories` collection. 
+ `db.news_stories.find()` will show you the first 20 entries.
 
 ###Running
 
