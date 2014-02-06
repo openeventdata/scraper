@@ -12,9 +12,18 @@ might (probably will) have to specify something along the lines of
 `--allow-all-external pattern --allow-unverified pattern` for the pattern
 library since it gets downloaded from its homepage. 
 
-Oh yea. It also requires a running MongoDB instance. See
-[here](http://docs.mongodb.org/manual/installation/) for more on how to get
-that running.
+The scraper requires  a running MongoDB instance to dump the scraped stories into. 
+Make sure you have MongoDB [installed](http://docs.mongodb.org/manual/installation/) 
+and type `mongod` at the terminal to begin the instance. MongoDB doesn't require you to prepare
+the collection or database ahead of time, so when you run the program it should automatically
+create a database called `event_scrape` with a collection called `stories`. Once you've run  `python scraper.py`, 
+you can verify that the stories are in the Mongo database by opening a new terminal wind and typing `mongo`. NOTE: 
+the scraper runs once every hour, meaning that stories may not immediately appear. To make sure that stories have been 
+scraped, comment out the scheduling part at the end of `scraper.py` and uncomment `call_scrape_func`. That will force an
+immediate scraping.
+
+From inside Mongo, type `show dbs` to verify that there's a database called `event_scrape`. Type `use event_scrape` and 
+`show collections` to make sure there's a `stories` collection. Typing  `db.news_stories.find()` will show you the first 20 entries.
 
 ###Running
 
@@ -25,7 +34,7 @@ specify the path to the file of URLs and the MongoDB collection that you want
 to used.
 
 The program will run once an hour and will pull from the RSS feeds specified in
-the URL file.
+the URL file. 
 
 ###Contributing
 
