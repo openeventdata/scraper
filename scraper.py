@@ -45,9 +45,18 @@ def scrape_func(address, website, COLL):
         if website == 'xinhua':
             page_url = result.url.encode('ascii')
             page_url = page_url.replace('"', '')
+        if website == 'upi':
+            page_url = result.url.encode('ascii')
+            text = pages_scrape.scrape(page_url)
+            #text = text.replace('"', '') Do we chop quotations out now or later?
+            text = text.replace("Since 1907, United Press International (UPI) has been a leading provider of critical information to media outlets, businesses, governments and researchers worldwide. UPI is a global operation with offices in Beirut, Hong Kong, London, Santiago, Seoul and Tokyo. Our headquarters is located in downtown Washington, DC, surrounded by major international policy-making governmental and non-governmental organizations. UPI licenses content directly to print outlets, online media and institutions of all types. In addition, UPI's distribution partners provide our content to thousands of businesses, policy groups and academic institutions worldwide. Our audience consists of millions of decision-makers who depend on UPI's insightful and analytical stories to make better business or policy decisions. In the year of our 107th anniversary, our company strives to continue being a leading and trusted source for news, analysis and insight for readers around the world.", '')
+        if website == 'bbc':
+            page_url = result.url   
+            text = pages_scrape.scrape(page_url)
+            text = text.replace("This page is best viewed in an up-to-date web browser with style sheets (CSS) enabled. While you will be able to view the content of this page in your current browser, you will not be able to get the full visual experience. Please consider upgrading your browser software or enabling style sheets (CSS) if you are able to do so.", '')      
         else:
             page_url = result.url
-        text = pages_scrape.scrape(page_url)
+            text = pages_scrape.scrape(page_url)
         entry_id = mongo_connection.add_entry(collection, text, result.title,
                                               result.url, result.date, website)
         if entry_id:
@@ -139,3 +148,4 @@ if __name__ == '__main__':
     while True:
         time.sleep(10)
     sched.shutdown()
+
