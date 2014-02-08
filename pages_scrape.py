@@ -1,6 +1,5 @@
-import justext
 import logging
-import requests
+from goose import Goose
 
 
 def scrape(url):
@@ -19,21 +18,18 @@ def scrape(url):
 
     text : String.
             Parsed text from the specified website.
+
+    meta : String.
+            Parsed meta description of an article. Usually equivalent to the
+            lede.
     """
     logger = logging.getLogger('scraper_log')
-    text = ''
+    g = Goose()
     try:
-        headers = {'User-Agent':
-                   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36"}
-        page = requests.get(url, headers=headers)
-        #Use justext to pull out the relevant info
-        paragraphs = justext.justext(page.content,
-                                     justext.get_stoplist('English'))
-        #And keep only the good paragraphs
-        for par in paragraphs:
-            if not par.is_boilerplate:
-                text += par.text + ' '
-        return text
+        article = g.extract(url=url)
+        text = article.cleaned_text
+        meta = article.meta_description
+        return text, meta
     #Generic error catching is bad
     except Exception, e:
         print 'There was an error. Check the log file for more information.'

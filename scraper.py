@@ -47,7 +47,7 @@ def scrape_func(address, website, COLL):
             page_url = page_url.replace('"', '')
         else:
             page_url = result.url
-        text = pages_scrape.scrape(page_url)
+        text, meta = pages_scrape.scrape(page_url)
         entry_id = mongo_connection.add_entry(collection, text, result.title,
                                               result.url, result.date, website)
         if entry_id:
