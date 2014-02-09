@@ -1,4 +1,5 @@
 import logging
+import requests
 from goose import Goose
 
 
@@ -24,9 +25,10 @@ def scrape(url):
             lede.
     """
     logger = logging.getLogger('scraper_log')
+    page = requests.get(url)
     g = Goose()
     try:
-        article = g.extract(url=url)
+        article = g.extract(raw_html=page.content)
         text = article.cleaned_text
         meta = article.meta_description
         return text, meta
