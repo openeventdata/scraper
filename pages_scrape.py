@@ -25,14 +25,19 @@ def scrape(url):
             lede.
     """
     logger = logging.getLogger('scraper_log')
-    page = requests.get(url)
-    g = Goose()
     try:
-        article = g.extract(raw_html=page.content)
-        text = article.cleaned_text
-        meta = article.meta_description
-        return text, meta
-    #Generic error catching is bad
+        page = requests.get(url)
+        g = Goose({'use_meta_language': False, 'target_language': 'en'})
+        try:
+            article = g.extract(raw_html=page.content)
+            text = article.cleaned_text
+            meta = article.meta_description
+            return text, meta
+        #Generic error catching is bad
+        except Exception, e:
+            print 'There was an error. Check the log file for more information.'
+            logger.warning('Problem scraping URL: {}. {}.'.format(url, e))
     except Exception, e:
         print 'There was an error. Check the log file for more information.'
-        logger.warning('Problem scraping URL: {}. {}.'.format(url, e))
+        logger.warning('Problem requesting url: {}. {}'.format(url, e))
+
