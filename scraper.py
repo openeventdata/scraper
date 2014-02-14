@@ -135,7 +135,7 @@ if __name__ == '__main__':
     fh.setFormatter(formatter)
 
     logger.addHandler(fh)
-    logger.info('Running')
+    logger.info('Running in scheduled hourly mode')
 
     print 'Running. See log file for further information.'
     #Get the info from the config
