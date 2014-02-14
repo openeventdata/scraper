@@ -5,6 +5,7 @@ import logging
 import pattern.web
 import pages_scrape
 import mongo_connection
+from goose import Goose
 from pymongo import MongoClient
 from ConfigParser import ConfigParser
 from apscheduler.scheduler import Scheduler
@@ -44,19 +45,25 @@ def scrape_func(address, website, COLL):
         results = None
     #Pursue each link in the feed
     if results:
+        goose_extractor = Goose({'use_meta_language': False,
+                                 'target_language': 'en'})
         for result in results:
             if website == 'xinhua':
+                logger.info('XINHUA!')
                 page_url = result.url.encode('ascii')
                 page_url = page_url.replace('"', '')
+                logger.info('Xinhua url: {}'.format(page_url))
             if website == 'upi':
                 page_url = result.url.encode('ascii')
             else:
                 page_url = result.url
 
             try:
-                text, meta = pages_scrape.scrape(page_url)
+                text, meta = pages_scrape.scrape(page_url, goose_extractor)
+                text = text.encode('utf-8')
             except TypeError:
                 logger.warning('Problem obtaining text from URL: {}'.format(page_url))
+                text = ''
 
             if text:
                 if website == 'aljazeera':
