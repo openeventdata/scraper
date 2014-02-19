@@ -68,8 +68,9 @@ def scrape_func(address, website, COLL):
                 if website == 'bbc':
                     text = text.replace("This page is best viewed in an up-to-date web browser with style sheets (CSS) enabled. While you will be able to view the content of this page in your current browser, you will not be able to get the full visual experience. Please consider upgrading your browser software or enabling style sheets (CSS) if you are able to do so.", '')
                 if website == 'almonitor':
-                    text = re.sub("^.*\(photo by REUTERS.*\)", "", text)
-                    text = re.sub("^.*\(photo by .*Getty Images.*\)", "", text)
+                    text = re.sub("^.*?\(photo by REUTERS.*?\)", "", text)
+                if website == 'menafn_algeria' or website == 'menafn_bahrain' or website == 'menafn_egypt' or website == 'menafn_iraq' or website == 'menafn_jordan' or website == 'menafn_kuwait' or website == 'menafn_lebanon' or website == 'menafn_morocco' or website == 'menafn_oman' or website == 'menafn_palestine' or website == 'menafn_qatar' or website == 'menafn_saudi' or website == 'menafn_syria' or website == 'menafn_tunisia' or website == 'menafn_turkey' or website == 'menafn_uae' or website == 'menafn_yemen':
+                    text = re.sub("^\(.*?MENAFN.*?\)", "", text)
                 elif website == 'upi':
                     text = text.replace("Since 1907, United Press International (UPI) has been a leading provider of critical information to media outlets, businesses, governments and researchers worldwide. UPI is a global operation with offices in Beirut, Hong Kong, London, Santiago, Seoul and Tokyo. Our headquarters is located in downtown Washington, DC, surrounded by major international policy-making governmental and non-governmental organizations. UPI licenses content directly to print outlets, online media and institutions of all types. In addition, UPI's distribution partners provide our content to thousands of businesses, policy groups and academic institutions worldwide. Our audience consists of millions of decision-makers who depend on UPI's insightful and analytical stories to make better business or policy decisions. In the year of our 107th anniversary, our company strives to continue being a leading and trusted source for news, analysis and insight for readers around the world.", '')
 
