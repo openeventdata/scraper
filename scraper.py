@@ -1,7 +1,6 @@
 import os
 import re
 import glob
-import time
 import logging
 import pattern.web
 import pages_scrape
@@ -9,7 +8,6 @@ import mongo_connection
 from goose import Goose
 from pymongo import MongoClient
 from ConfigParser import ConfigParser
-from apscheduler.scheduler import Scheduler
 
 
 def scrape_func(address, website, COLL):
@@ -135,7 +133,7 @@ if __name__ == '__main__':
     logger = logging.getLogger('scraper_log')
     logger.setLevel(logging.INFO)
 
-    fh = logging.FileHandler('scraping_log.log', 'w')
+    fh = logging.FileHandler('scraping_log.log', 'a')
     formatter = logging.Formatter('%(levelname)s %(asctime)s: %(message)s')
     fh.setFormatter(formatter)
 
@@ -155,14 +153,4 @@ if __name__ == '__main__':
         print 'There was an error. Check the log file for more information.'
         logger.warning('Could not open URL whitelist file.')
 
-    #Line to aid in debugging
-    #call_scrape_func(to_scrape, db_collection)
-
-    #Run the `scrape_func` once each hour
-    sched = Scheduler()
-    sched.add_interval_job(call_scrape_func, args=[to_scrape, db_collection],
-                           hours=1)
-    sched.start()
-    while True:
-        time.sleep(10)
-    sched.shutdown()
+    call_scrape_func(to_scrape, db_collection)
