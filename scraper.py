@@ -8,20 +8,21 @@ import mongo_connection
 from goose import Goose
 from pymongo import MongoClient
 from ConfigParser import ConfigParser
+from multiprocessing import Pool
 
 
-def scrape_func(address, website, COLL):
+def scrape_func(website, address, COLL):
     """
     Function to scrape various RSS feeds. Uses the 'keep' and 'ignore'
     iterables to define which words should be used in the text search.
 
     Parameters
     ------
+    website: String
+            Nickname for the RSS feed being scraped.
+
     address : String
                 Address for the RSS feed to scrape.
-
-    name : String
-            Nickname for the RSS feed being scraped.
 
     COLL : String
             Collection within MongoDB that holds the scraped data.
@@ -84,7 +85,7 @@ def scrape_func(address, website, COLL):
     logger.info('Scrape of {} finished'.format(website))
 
 
-def call_scrape_func(siteList, db_collection):
+def call_scrape_func(siteList, db_collection, pool_size):
     """
     Helper function to iterate over a list of RSS feeds and scrape each.
 
@@ -94,9 +95,16 @@ def call_scrape_func(siteList, db_collection):
     siteList : dictionary
                 Dictionary of sites, with a nickname as the key and RSS URL
                 as the value.
+
+    db_collection : collection
+                    Mongo collection to put stories
+
+    pool_size : int
+                Number of processes to distribute work
     """
-    for website in siteList:
-        scrape_func(siteList[website], website, db_collection)
+    pool = Pool(pool_size)
+    results = [pool.apply_async(scrape_func, (address, website, db_collection)) for address, website in siteList.iteritems()]
+    timeout = [r.get(9999999) for r in results]
     logger.info('Completed full scrape.')
 
 
@@ -110,7 +118,8 @@ def parse_config():
         try:
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
-            return collection, whitelist
+            pool_size = int(parser.get('Processes', 'pool_size'))
+            return collection, whitelist, pool_size
         except Exception, e:
             print 'There was an error. Check the log file for more information.'
             logger.warning('Problem parsing config file. {}'.format(e))
@@ -122,7 +131,8 @@ def parse_config():
         try:
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
-            return collection, whitelist
+            pool_size = int(parser.get('Processes', 'pool_size'))
+            return collection, whitelist, pool_size
         except Exception, e:
             print 'There was an error. Check the log file for more information.'
             logger.warning('Problem parsing config file. {}'.format(e))
@@ -142,7 +152,7 @@ if __name__ == '__main__':
 
     print 'Running. See log file for further information.'
     #Get the info from the config
-    db_collection, whitelist_file = parse_config()
+    db_collection, whitelist_file, pool_size = parse_config()
 
     #Convert from CSV of URLs to a dictionary
     try:
@@ -153,4 +163,4 @@ if __name__ == '__main__':
         print 'There was an error. Check the log file for more information.'
         logger.warning('Could not open URL whitelist file.')
 
-    call_scrape_func(to_scrape, db_collection)
+    call_scrape_func(to_scrape, db_collection, pool_size)
