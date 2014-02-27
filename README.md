@@ -23,7 +23,7 @@ the scraper runs once every hour, meaning that stories may not immediately appea
  
 To interface with Mongo, enter `mongo` at the command line. From inside Mongo, type `show dbs` to verify that there's a database called `event_scrape`. 
 Enter the database with `use event_scrape` and type `show collections` to make sure there's a `stories` collection. 
- `db.news_stories.find()` will show you the first 20 entries.
+ `db.stories.find()` will show you the first 20 entries.
 
 ###Running
 
