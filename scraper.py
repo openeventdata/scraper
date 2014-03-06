@@ -114,6 +114,7 @@ def _parse_results(rss_results, website, db_collection):
                 text = ''
         else:
             logger.info('Result from {} already in database'.format(page_url))
+            text = ''
 
         if text:
             cleaned_text = _clean_text(text, website)
