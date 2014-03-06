@@ -100,19 +100,20 @@ def _parse_results(rss_results, website, db_collection):
                              'enable_image_fetching': False})
 
     for result in rss_results:
-        if website == 'xinhua':
-            page_url = result.url.replace('"', '')
-            page_url = page_url.encode('ascii')
-        elif website == 'upi':
-            page_url = result.url.encode('ascii')
-        else:
-            page_url = result.url.encode('utf-8')
 
-        try:
-            text, meta = pages_scrape.scrape(page_url, goose_extractor)
-            text = text.encode('utf-8')
-        except TypeError:
-            logger.warning('Problem obtaining text from URL: {}'.format(page_url))
+        page_url = _convert_url(result.url)
+
+        in_database = _check_mongo(page_url, db_collection)
+
+        if not in_database:
+            try:
+                text, meta = pages_scrape.scrape(page_url, goose_extractor)
+                text = text.encode('utf-8')
+            except TypeError:
+                logger.warning('Problem obtaining text from URL: {}'.format(page_url))
+                text = ''
+        else:
+            logger.info('Result from {} already in database'.format(page_url))
             text = ''
 
         if text:
@@ -127,8 +128,63 @@ def _parse_results(rss_results, website, db_collection):
                                                                         entry_id))
                 except UnicodeDecodeError:
                     logger.info('Added entry from {}. Unicode error for id'.format(result.url))
-            else:
-                logger.info('Result from {} already in database'.format(page_url))
+
+
+def _check_mongo(url, db_collection):
+    """
+    Private function to check if a URL appears in the database.
+
+    Parameters
+    ----------
+
+    url: String.
+            URL for the news stories to be scraped.
+
+    db_collection: pymongo Collection.
+                        Collection within MongoDB that in which results are
+                        stored.
+
+    Returns
+    -------
+
+    found: Boolean.
+            Indicates whether or not a URL was found in the database.
+    """
+
+    if db_collection.find_one({"url": url}):
+        found = True
+    else:
+        found = False
+
+    return found
+
+
+def _convert_url(url):
+    """
+    Private function to clean a given page URL.
+
+    Parameters
+    ----------
+
+    url: String.
+            URL for the news stories to be scraped.
+
+    Returns
+    -------
+
+    page_url: String.
+                Cleaned and unicode converted page URL.
+    """
+
+    if url == 'xinhua':
+        page_url = url.replace('"', '')
+        page_url = page_url.encode('ascii')
+    elif url == 'upi':
+        page_url = url.encode('ascii')
+    else:
+        page_url = url.encode('utf-8')
+
+    return page_url
 
 
 def _clean_text(text, website):

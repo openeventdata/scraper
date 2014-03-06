@@ -40,8 +40,5 @@ def add_entry(collection, text, title, url, date, website):
                 "date_added": datetime.datetime.utcnow(),
                 "content": text,
                 "stanford": 0}
-    if collection.find_one({"url": url}):
-        pass
-    else:
-        object_id = collection.insert(toInsert)
-        return object_id
+    object_id = collection.insert(toInsert)
+    return object_id
