@@ -28,7 +28,9 @@ def scrape(url, extractor):
     """
     logger = logging.getLogger('scraper_log')
     try:
-        page = requests.get(url)
+        headers = {'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36"}
+
+        page = requests.get(url, headers=headers)
         try:
             article = extractor.extract(raw_html=page.content)
             text = article.cleaned_text
@@ -41,4 +43,3 @@ def scrape(url, extractor):
     except Exception, e:
         print 'There was an error. Check the log file for more information.'
         logger.warning('Problem requesting url: {}. {}'.format(url, e))
-
