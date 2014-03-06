@@ -96,7 +96,8 @@ def _parse_results(rss_results, website, db_collection):
                         stored.
     """
     goose_extractor = Goose({'use_meta_language': False,
-                             'target_language': 'en'})
+                             'target_language': 'en',
+                             'enable_image_fetching': False})
 
     for result in rss_results:
         if website == 'xinhua':
