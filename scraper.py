@@ -166,6 +166,8 @@ def _clean_text(text, website):
     elif website == 'upi':
         text = text.replace("Since 1907, United Press International (UPI) has been a leading provider of critical information to media outlets, businesses, governments and researchers worldwide. UPI is a global operation with offices in Beirut, Hong Kong, London, Santiago, Seoul and Tokyo. Our headquarters is located in downtown Washington, DC, surrounded by major international policy-making governmental and non-governmental organizations. UPI licenses content directly to print outlets, online media and institutions of all types. In addition, UPI's distribution partners provide our content to thousands of businesses, policy groups and academic institutions worldwide. Our audience consists of millions of decision-makers who depend on UPI's insightful and analytical stories to make better business or policy decisions. In the year of our 107th anniversary, our company strives to continue being a leading and trusted source for news, analysis and insight for readers around the world.", '')
 
+    text = text.replace('\n', '')
+
     return text
 
 
@@ -187,7 +189,8 @@ def call_scrape_func(siteList, db_collection, pool_size):
                 Number of processes to distribute work
     """
     pool = Pool(pool_size)
-    results = [pool.apply_async(scrape_func, (address, website, db_collection)) for address, website in siteList.iteritems()]
+    results = [pool.apply_async(scrape_func, (address, website, db_collection))
+               for address, website in siteList.iteritems()]
     timeout = [r.get(9999999) for r in results]
     logger.info('Completed full scrape.')
 
