@@ -64,7 +64,7 @@ def _get_rss(address, website):
     """
     try:
         results = pattern.web.Newsfeed().search(address, count=100,
-                                                cached=False)
+                                                cached=False, timeout=30)
         logger.info('There are {} results from {}'.format(len(results),
                                                           website))
     except Exception, e:
