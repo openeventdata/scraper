@@ -161,3 +161,6 @@ thenews_pk_karachi,http://feeds.feedburner.com/TheNewsInternational-Karachi
 thenews_pk_national,http://feeds.feedburner.com/TheNewsInternational-National
 thenational_uae,http://www.thenational.ae/section/rss
 pahjwok_english,http://www.pajhwok.com/en/nodequeue/1/feed
+rfe,http://www.rferl.org/api/epiqq
+rfa,http://www.rfa.org/english/RSS
+euronews,http://feeds.feedburner.com/euronews/en/home?format=xml
