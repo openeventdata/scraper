@@ -1,0 +1,24 @@
+.. OEDA Scraper documentation master file, created by
+   sphinx-quickstart on Mon Apr 14 15:59:00 2014.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to OEDA Scraper's documentation!
+========================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   scraper
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
