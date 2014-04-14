@@ -2,7 +2,7 @@ Scraper Package
 ================
 
 :mod:`scraper` Module
--------------------
+---------------------
 
 .. automodule:: scraper
     :members:
@@ -18,7 +18,7 @@ Scraper Package
     :show-inheritance:
                     
 :mod:`mongo_connection` Module
--------------------
+------------------------------
                 
 .. automodule:: mongo_connection
     :members:
