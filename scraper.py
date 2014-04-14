@@ -16,7 +16,8 @@ def scrape_func(website, address, COLL):
     Function to scrape various RSS feeds.
 
     Parameters
-    ------
+    ----------
+
     website: String
             Nickname for the RSS feed being scraped.
 
@@ -46,7 +47,8 @@ def _get_rss(address, website):
     Private function to parse an RSS feed and extract the relevant links.
 
     Parameters
-    ------
+    ----------
+
     address: String.
                 Address for the RSS feed to scrape.
 
@@ -81,7 +83,8 @@ def _parse_results(rss_results, website, db_collection):
     Private function to parse the links drawn from an RSS feed.
 
     Parameters
-    ------
+    ----------
+
     rss_results: pattern.web.Results.
                     Object containing data on the parsed RSS feed. Each item
                     represents a unique entry in the RSS feed and contains
@@ -193,7 +196,7 @@ def _clean_text(text, website):
     various sources.
 
     Parameters
-    --------
+    ----------
 
     text: String.
             Dirty text.
@@ -202,7 +205,7 @@ def _clean_text(text, website):
                 Nickname for the RSS feed being scraped.
 
     Returns
-    ------
+    -------
 
     text: String.
             Less dirty text.
