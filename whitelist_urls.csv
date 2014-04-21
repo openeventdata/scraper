@@ -165,3 +165,11 @@ rfe,http://www.rferl.org/api/epiqq
 rfa,http://www.rfa.org/english/RSS
 euronews,http://feeds.feedburner.com/euronews/en/home?format=xml
 balkanins,http://www.balkaninsight.com/en/rss/all-balkans-news-latest
+sudantrib,http://www.sudantribune.com/spip.php?page=backend
+setimes,http://www.setimes.com/cocoon/setimes/rss/en_GB/setimes.rss
+arab_saud,http://www.arabnews.com/cat/1/rss.xml
+arab_me,http://www.arabnews.com/cat/2/rss.xml
+arabn_world,http://www.arabnews.com/cat/3/rss.xml
+arabn_econ,http://www.arabnews.com/cat/4/rss.xml
+khaleej_reg,http://www.khaleejtimes.com/services/rss/region/rss.xml
+khaleej_world,http://www.khaleejtimes.com/services/rss/international/rss.xml
