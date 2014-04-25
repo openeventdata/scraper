@@ -127,6 +127,13 @@ miami_nation,http://www.miamiherald.com/news/nation/index.xml
 miami_politics,http://www.miamiherald.com/news/politics/index.xml
 miami_world,http://www.miamiherald.com/news/world/index.xml
 nyt,http://rss.nytimes.com/services/xml/rss/nyt/World.xml
+nytafrica,http://rss.nytimes.com/services/xml/rss/nyt/Africa.xml
+nytamericas,http://rss.nytimes.com/services/xml/rss/nyt/Americas.xml
+nytasiapacific,http://rss.nytimes.com/services/xml/rss/nyt/AsiaPacific.xml
+nytatwar,http://atwar.blogs.nytimes.com/feed/
+nyteurope,http://rss.nytimes.com/services/xml/rss/nyt/Europe.xml
+nytindia,http://india.blogs.nytimes.com/feed/
+nytmiddleeast,http://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml
 pahjwok_english,http://www.pajhwok.com/en/nodequeue/1/feed
 payvand,http://www.payvand.com/news/rssfeed.xml
 reuters,http://feeds.reuters.com/Reuters/worldNews
