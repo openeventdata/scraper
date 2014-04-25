@@ -61,7 +61,6 @@ daily_monitor_uganda,http://www.monitor.co.ug/-/691150/691150/-/view/asFeed/-/11
 daily_star_lebanon,http://www.dailystar.com.lb/RSS.aspx?id=1
 daily_star_middle_east,http://www.dailystar.com.lb/RSS.aspx?id=102
 daily_start_int,http://www.dailystar.com.lb/RSS.aspx?id=113
-dawn,http://feeds.feedburner.com/dawn-news?format=xml
 dawn_pk,http://feeds.feedburner.com/dawn-news
 dw,http://rss.dw.de/rdf/rss-en-all
 east_african,http://www.theeastafrican.co.ke/-/2456/2456/-/view/asFeed/-/13blr5d/-/index.xml
@@ -72,7 +71,7 @@ france24_asiap,http://www.france24.com/en/asia-pacific/rss/
 france24_me,http://www.france24.com/en/middle-east/rss
 ft,http://www.ft.com/rss/world
 google,https://news.google.com/?output=rss
-granma,http://www.granma.cu/feed
+granma,http://www.granma.cu/idiomas/ingles/granmai_ingl.xml
 guardian_africa,http://www.theguardian.com/world/africa/roundup/rss
 guardian_americas,http://www.theguardian.com/world/americas/roundup/rss
 guardian_china,http://feeds.theguardian.com/theguardian/world/china/rss
