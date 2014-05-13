@@ -2,11 +2,13 @@ alakhbar,http://feeds.feedburner.com/AlAkhbarEnglish?format=xml
 aljazeera,http://america.aljazeera.com/content/ajam/articles.rss
 allafrica,http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf
 almonitor,http://www.al-monitor.com/rss
+africa_newstime,http://feeds.feedburner.com/NewstimeAfrica?format=xml
 ap,http://hosted2.ap.org/atom/APDEFAULT/cae69a7523db45408eeb2b3a98c0c9c5
 asianage_delhi,http://www.asianage.com/rss/40
 asianage_india,http://www.asianage.com/rss/38
 asianage_int,http://www.asianage.com/rss/37
 asianage_mumbai,http://www.asianage.com/rss/42
+asiancorrespondent,http://asiancorrespondent.com/feed/
 austria_voice,http://voiceofvienna.org/?feed=rss2
 balkanins,http://www.balkaninsight.com/en/rss/all-balkans-news-latest
 baltic_times,http://feeds.feedburner.com/TheBalticTimes?format=xml
@@ -125,6 +127,10 @@ hurriyet,http://www.hurriyetdailynews.com/rss.aspx
 india_deccanher_elec,http://www.deccanherald.com/rss/election-news.rss
 india_deccanher_int,http://www.deccanherald.com/rss-internal/top-stories.rss
 india_deccanher_news,http://www.deccanherald.com/rss/news.rss
+india_mint_companies,http://www.livemint.com/rss/companies
+india_mint_econpol,http://www.livemint.com/rss/economy_politics
+india_mint_homepage,http://www.livemint.com/rss/homepage
+india_mint_industry,http://www.livemint.com/rss/industry
 india_statesman_bengal,http://www.thestatesman.net/feed.aspx?cat_id=10
 india_statesman_india,http://www.thestatesman.net/feed.aspx?cat_id=1
 india_statesman_odisha,http://www.thestatesman.net/feed.aspx?cat_id=429
@@ -258,6 +264,7 @@ nytmiddleeast,http://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml
 nxherald_national,http://rss.nzherald.co.nz/rss/xml/nzhrsscid_000000001.xml
 nzherald_world,http://rss.nzherald.co.nz/rss/xml/nzhrsscid_000000002.xml
 pahjwok_english,http://www.pajhwok.com/en/nodequeue/1/feed
+pakistan_balohhal,http://thebalochhal.com/feed/
 panamanews,http://thepanamanews.com/wp/?feed=rss2
 payvand,http://www.payvand.com/news/rssfeed.xml
 phil_inquirer,http://www.inquirer.net/fullfeed
