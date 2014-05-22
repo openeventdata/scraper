@@ -265,8 +265,9 @@ def parse_config():
         try:
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
+            sources = parser.get('URLS', 'sources').split(',')
             pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, pool_size
+            return collection, whitelist, sources, pool_size
         except Exception, e:
             print 'There was an error. Check the log file for more information.'
             logger.warning('Problem parsing config file. {}'.format(e))
@@ -278,8 +279,9 @@ def parse_config():
         try:
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
+            sources = parser.get('URLS', 'sources').split(',')
             pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, pool_size
+            return collection, whitelist, sources, pool_size
         except Exception, e:
             print 'There was an error. Check the log file for more information.'
             logger.warning('Problem parsing config file. {}'.format(e))
@@ -299,13 +301,14 @@ if __name__ == '__main__':
 
     print 'Running. See log file for further information.'
     #Get the info from the config
-    db_collection, whitelist_file, pool_size = parse_config()
+    db_collection, whitelist_file, sources, pool_size = parse_config()
 
     #Convert from CSV of URLs to a dictionary
     try:
         url_whitelist = open(whitelist_file, 'r').readlines()
-        url_whitelist = [line.split(',') for line in url_whitelist if line]
-        to_scrape = {listing[0]: listing[1] for listing in url_whitelist}
+        url_whitelist = [line.replace('\n', '').split(',') for line in url_whitelist if line]
+        #Filtering based on list of sources from the config file
+        to_scrape = {listing[0]: listing[1] for listing in url_whitelist if listing[2] in sources}
     except IOError:
         print 'There was an error. Check the log file for more information.'
         logger.warning('Could not open URL whitelist file.')
