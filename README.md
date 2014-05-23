@@ -29,9 +29,13 @@ Enter the database with `use event_scrape` and type `show collections` to make s
 
 After everything is installed, it's as simple as `python scraper.py`. That is
 assuming, of course, that you wish to use the configuration seen in the
-`default_config.ini` file. If not, just modify that. It's only set up to
-specify the path to the file of URLs and the MongoDB collection that you want
-to used.
+`default_config.ini` file. If not, just modify that. The config file is
+currently used to specify the path to the file of URLs, the MongoDB collection
+that you want to use, and the type of sources used within the scraper. The
+three types of sources are `wire`, `international`, and `local`. It is possible
+to specify any combination of those source types, with the source types
+separated by commas in the config file. For more information on the source
+types, see the **Contributing** section below.
 
 The program will run once an hour and will pull from the RSS feeds specified in
 the URL file. 
