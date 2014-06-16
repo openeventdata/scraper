@@ -260,7 +260,7 @@ def parse_config():
     config_file = glob.glob('config.ini')
     parser = ConfigParser()
     if config_file:
-        logger.info('Found a config file in working directory')
+        print 'Found a config file in working directory'
         parser.read(config_file)
         try:
             if 'Logging' in cparser.sections():
@@ -273,13 +273,12 @@ def parse_config():
             pool_size = int(parser.get('Processes', 'pool_size'))
             return collection, whitelist, sources, pool_size, log_dir
         except Exception, e:
-            print 'There was an error. Check the log file for more information.'
-            logger.warning('Problem parsing config file. {}'.format(e))
+            print 'Problem parsing config file. {}'.format(e)
     else:
         cwd = os.path.abspath(os.path.dirname(__file__))
         config_file = os.path.join(cwd, 'default_config.ini')
         parser.read(config_file)
-        logger.info('No config found. Using default.')
+        print 'No config found. Using default.'
         try:
             if 'Logging' in cparser.sections():
                 log_dir = cparser.get('Logging', 'log_file')
@@ -291,8 +290,7 @@ def parse_config():
             pool_size = int(parser.get('Processes', 'pool_size'))
             return collection, whitelist, sources, pool_size, log_dir
         except Exception, e:
-            print 'There was an error. Check the log file for more information.'
-            logger.warning('Problem parsing config file. {}'.format(e))
+            print 'Problem parsing config file. {}'.format(e)
 
 
 if __name__ == '__main__':
