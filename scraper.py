@@ -263,11 +263,15 @@ def parse_config():
         logger.info('Found a config file in working directory')
         parser.read(config_file)
         try:
+            if 'Logging' in cparser.sections():
+                log_dir = cparser.get('Logging', 'log_file')
+            else:
+                log_dir = ''
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
             sources = parser.get('URLS', 'sources').split(',')
             pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, sources, pool_size
+            return collection, whitelist, sources, pool_size, log_dir
         except Exception, e:
             print 'There was an error. Check the log file for more information.'
             logger.warning('Problem parsing config file. {}'.format(e))
@@ -277,22 +281,31 @@ def parse_config():
         parser.read(config_file)
         logger.info('No config found. Using default.')
         try:
+            if 'Logging' in cparser.sections():
+                log_dir = cparser.get('Logging', 'log_file')
+            else:
+                log_dir = ''
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
             sources = parser.get('URLS', 'sources').split(',')
             pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, sources, pool_size
+            return collection, whitelist, sources, pool_size, log_dir
         except Exception, e:
             print 'There was an error. Check the log file for more information.'
             logger.warning('Problem parsing config file. {}'.format(e))
 
 
 if __name__ == '__main__':
+    #Get the info from the config
+    db_collection, whitelist_file, sources, pool_size, log_dir = parse_config()
     #Setup the logging
     logger = logging.getLogger('scraper_log')
     logger.setLevel(logging.INFO)
 
-    fh = logging.FileHandler('scraping_log.log', 'a')
+    if log_dir:
+        fh = logging.FileHandler(log_dir, 'a')
+    else:
+        fh = logging.FileHandler('scraping.log', 'a')
     formatter = logging.Formatter('%(levelname)s %(asctime)s: %(message)s')
     fh.setFormatter(formatter)
 
@@ -300,8 +313,6 @@ if __name__ == '__main__':
     logger.info('Running in scheduled hourly mode')
 
     print 'Running. See log file for further information.'
-    #Get the info from the config
-    db_collection, whitelist_file, sources, pool_size = parse_config()
 
     #Convert from CSV of URLs to a dictionary
     try:
