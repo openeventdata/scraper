@@ -263,8 +263,8 @@ def parse_config():
         print 'Found a config file in working directory'
         parser.read(config_file)
         try:
-            if 'Logging' in cparser.sections():
-                log_dir = cparser.get('Logging', 'log_file')
+            if 'Logging' in parser.sections():
+                log_dir = parser.get('Logging', 'log_file')
             else:
                 log_dir = ''
             collection = parser.get('Database', 'collection_list')
@@ -280,8 +280,8 @@ def parse_config():
         parser.read(config_file)
         print 'No config found. Using default.'
         try:
-            if 'Logging' in cparser.sections():
-                log_dir = cparser.get('Logging', 'log_file')
+            if 'Logging' in parser.sections():
+                log_dir = parser.get('Logging', 'log_file')
             else:
                 log_dir = ''
             collection = parser.get('Database', 'collection_list')
