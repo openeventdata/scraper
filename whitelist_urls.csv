@@ -186,6 +186,9 @@ local_norway,http://www.thelocal.no/feeds/rss.php,local
 local_spain,http://www.thelocal.es/feeds/rss.php,local
 local_sweden,http://www.thelocal.se/feeds/rss.php,local
 local_switzerland,http://www.thelocal.ch/feeds/rss.php,local
+maan_news,http://maannews.net/ENG/Rss.aspx?CID=NEW,international
+maan_regional,http://maannews.net/ENG/Rss.aspx?CID=RGN,international
+maan_politics,http://maannews.net/ENG/Rss.aspx?CID=POL,international
 mail_and_guardian,http://mg.co.za/rss/,local
 malstar_nat,http://www.thestar.com.my/RSS/News/Nation/,local
 malstar_regional,http://www.thestar.com.my/RSS/News/Regional/,international
@@ -216,11 +219,14 @@ miami_haiti,http://www.miamiherald.com/news/americas/haiti/index.xml,local
 miami_nation,http://www.miamiherald.com/news/nation/index.xml,local
 miami_politics,http://www.miamiherald.com/news/politics/index.xml,local
 miami_world,http://www.miamiherald.com/news/world/index.xml,international
+miltimes_army,http://projects.militarytimes.com/rss-feed/?sitename=Army,international
+miltimes_navy,http://projects.militarytimes.com/rss-feed/?sitename=Navy,international
 minnstartrib_national,http://www.startribune.com/nation/index.rss2,local
 minnstartrib_world,http://www.startribune.com/world/index.rss2,international
 moldova_infotag,http://www.infotag.md/eng/,local
 moscow_times,http://www.themoscowtimes.com/rss/news/,international
 nation_news,http://feeds.feedburner.com/pakistan-news-newspaper-daily-english-online/24hours-news?format=xml,international
+nigeria_abusidiqu,http://abusidiqu.com/feed/,local
 nigeria_advocate,http://theadvocatengr.com/new/?feed=rss2,local
 nigeria_blanknews,http://blanknewsonline.wordpress.com/feed/,local
 nigeria_blueprint,http://www.blueprint.ng/feed/,local
@@ -348,6 +354,9 @@ thenews_pk_peshawar,http://feeds.feedburner.com/TheNewsInternational-Peshawar,lo
 times_of_india_india,http://timesofindia.feedsportal.com/c/33039/f/533965/index.rss,local
 times_of_india_world,http://timesofindia.feedsportal.com/c/33039/f/533917/index.rss,international
 tolo,http://www.tolonews.com/en/component/ninjarsssyndicator/?feed_id=1&format=raw,local
+toronto_star_top,http://www.thestar.com/feeds.topstories.rss,international
+toronto_star_world,http://www.thestar.com/feeds.articles.news.world.rss,international
+toronto_star_canada,http://www.thestar.com/feeds.articles.news.canada.rss,international
 uganda_monitor,http://www.monitor.co.ug/-/691150/691150/-/view/asFeed/-/11emxavz/-/index.xml,local
 uganda_newvision_national,http://www.newvision.co.ug/feed.aspx?cat_id=1,local
 uganda_newvision_world,http://www.newvision.co.ug/feed.aspx?cat_id=2,local
