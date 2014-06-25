@@ -83,6 +83,8 @@ daily_star_middle_east,http://www.dailystar.com.lb/RSS.aspx?id=102,international
 daily_start_int,http://www.dailystar.com.lb/RSS.aspx?id=113,international
 dawn_pk,http://feeds.feedburner.com/dawn-news,international
 detriot_fp,http://www.freep.com/apps/pbcs.dll/section?category=news&template=rss&mime=xml,local
+denverpost_top,http://feeds.denverpost.com/dp-news-topstories?format=xml,international
+denverpost_politics,http://feeds.denverpost.com/dp-politics-national_politics?format=xml,international
 dw,http://rss.dw.de/rdf/rss-en-all,international
 east_african,http://www.theeastafrican.co.ke/-/2456/2456/-/view/asFeed/-/13blr5d/-/index.xml,local
 egypt_dailynews,http://feeds.feedburner.com/DailyNewsEgypt,local
@@ -269,6 +271,7 @@ nytindia,http://india.blogs.nytimes.com/feed/,wire
 nytmiddleeast,http://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml,wire
 nxherald_national,http://rss.nzherald.co.nz/rss/xml/nzhrsscid_000000001.xml,local
 nzherald_world,http://rss.nzherald.co.nz/rss/xml/nzhrsscid_000000002.xml,international
+ocregister_ap,http://hosted2.ap.org/atom/CAANR/0260ea4c3e85456b80715585ba3c7b5b,international
 pahjwok_english,http://www.pajhwok.com/en/nodequeue/1/feed,international
 pakistan_balohhal,http://thebalochhal.com/feed/,local
 pakistan_busrecorder_pak,http://www.brecorder.com/rss/?feed_id=2&format=raw,local
