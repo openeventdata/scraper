@@ -11,7 +11,7 @@ from ConfigParser import ConfigParser
 from multiprocessing import Pool
 
 
-def scrape_func(website, address, COLL):
+def scrape_func(website, address, COLL, db_auth, db_user, db_pass):
     """
     Function to scrape various RSS feeds.
 
@@ -29,6 +29,8 @@ def scrape_func(website, address, COLL):
     """
     #Setup the database
     connection = MongoClient()
+    if db_auth:
+        connection[db_auth].authenticate(db_user, db_pass)
     db = connection.event_scrape
     collection = db[COLL]
 
@@ -267,11 +269,19 @@ def parse_config():
                 log_dir = parser.get('Logging', 'log_file')
             else:
                 log_dir = ''
+            if 'Auth' in parser.sections():
+                auth_db = parser.get('Auth', 'log_file')
+                auth_user = parser.get('Auth', 'auth_user')
+                auth_pass = parser.get('Auth', 'auth_pass')
+            else:
+                auth_db = ''
+                auth_user = ''
+                auth_pass = ''
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
             sources = parser.get('URLS', 'sources').split(',')
             pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, sources, pool_size, log_dir
+            return collection, whitelist, sources, pool_size, log_dir, auth_db, auth_user, auth_pass
         except Exception, e:
             print 'Problem parsing config file. {}'.format(e)
     else:
@@ -284,18 +294,26 @@ def parse_config():
                 log_dir = parser.get('Logging', 'log_file')
             else:
                 log_dir = ''
+            if 'Auth' in parser.sections():
+                auth_db = parser.get('Auth', 'log_file')
+                auth_user = parser.get('Auth', 'auth_user')
+                auth_pass = parser.get('Auth', 'auth_pass')
+            else:
+                auth_db = ''
+                auth_user = ''
+                auth_pass = ''
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
             sources = parser.get('URLS', 'sources').split(',')
             pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, sources, pool_size, log_dir
+            return collection, whitelist, sources, pool_size, log_dir, auth_db, auth_user, auth_pass
         except Exception, e:
             print 'Problem parsing config file. {}'.format(e)
 
 
 if __name__ == '__main__':
     #Get the info from the config
-    db_collection, whitelist_file, sources, pool_size, log_dir = parse_config()
+    db_collection, whitelist_file, sources, pool_size, log_dir, auth_db, auth_user, auth_pass = parse_config()
     #Setup the logging
     logger = logging.getLogger('scraper_log')
     logger.setLevel(logging.INFO)
