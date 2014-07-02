@@ -233,7 +233,8 @@ def _clean_text(text, website):
     return text
 
 
-def call_scrape_func(siteList, db_collection, pool_size):
+def call_scrape_func(siteList, db_collection, pool_size, db_auth, db_user,
+                     db_pass):
     """
     Helper function to iterate over a list of RSS feeds and scrape each.
 
@@ -251,7 +252,8 @@ def call_scrape_func(siteList, db_collection, pool_size):
                 Number of processes to distribute work
     """
     pool = Pool(pool_size)
-    results = [pool.apply_async(scrape_func, (address, website, db_collection))
+    results = [pool.apply_async(scrape_func, (address, website, db_collection,
+                                              db_auth, db_user, db_pass))
                for address, website in siteList.iteritems()]
     timeout = [r.get(9999999) for r in results]
     logger.info('Completed full scrape.')
@@ -340,4 +342,5 @@ if __name__ == '__main__':
         print 'There was an error. Check the log file for more information.'
         logger.warning('Could not open URL whitelist file.')
 
-    call_scrape_func(to_scrape, db_collection, pool_size)
+    call_scrape_func(to_scrape, db_collection, pool_size, auth_db, auth_user,
+                     auth_pass)
