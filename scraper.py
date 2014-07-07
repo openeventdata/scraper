@@ -21,11 +21,20 @@ def scrape_func(website, address, COLL, db_auth, db_user, db_pass):
     website: String
             Nickname for the RSS feed being scraped.
 
-    address : String
+    address: String
                 Address for the RSS feed to scrape.
 
-    COLL : String
+    COLL: String
             Collection within MongoDB that holds the scraped data.
+
+    db_auth: String.
+                MongoDB database that should be used for user authentication.
+
+    db_user: String.
+                Username for MongoDB authentication.
+
+    db_user: String.
+                Password for MongoDB authentication.
     """
     #Setup the database
     connection = MongoClient()
@@ -44,9 +53,9 @@ def scrape_func(website, address, COLL, db_auth, db_user, db_pass):
     logger.info('Scrape of {} finished'.format(website))
 
 
-def _get_rss(address, website):
+def get_rss(address, website):
     """
-    Private function to parse an RSS feed and extract the relevant links.
+    Function to parse an RSS feed and extract the relevant links.
 
     Parameters
     ----------
@@ -80,9 +89,9 @@ def _get_rss(address, website):
     return results
 
 
-def _parse_results(rss_results, website, db_collection):
+def parse_results(rss_results, website, db_collection):
     """
-    Private function to parse the links drawn from an RSS feed.
+    Function to parse the links drawn from an RSS feed.
 
     Parameters
     ----------
