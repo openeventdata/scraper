@@ -44,11 +44,11 @@ def scrape_func(website, address, COLL, db_auth, db_user, db_pass):
     collection = db[COLL]
 
     #Scrape the RSS feed
-    results = _get_rss(address, website)
+    results = get_rss(address, website)
 
     #Pursue each link in the feed
     if results:
-        _parse_results(results, website, collection)
+        parse_results(results, website, collection)
 
     logger.info('Scrape of {} finished'.format(website))
 
@@ -281,7 +281,7 @@ def parse_config():
             else:
                 log_dir = ''
             if 'Auth' in parser.sections():
-                auth_db = parser.get('Auth', 'log_file')
+                auth_db = parser.get('Auth', 'auth_db')
                 auth_user = parser.get('Auth', 'auth_user')
                 auth_pass = parser.get('Auth', 'auth_pass')
             else:
@@ -306,7 +306,7 @@ def parse_config():
             else:
                 log_dir = ''
             if 'Auth' in parser.sections():
-                auth_db = parser.get('Auth', 'log_file')
+                auth_db = parser.get('Auth', 'auth_db')
                 auth_user = parser.get('Auth', 'auth_user')
                 auth_pass = parser.get('Auth', 'auth_pass')
             else:
