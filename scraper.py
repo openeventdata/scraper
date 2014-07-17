@@ -288,10 +288,6 @@ def parse_config():
         print 'Found a config file in working directory'
         parser.read(config_file)
         try:
-            if 'Logging' in parser.sections():
-                log_dir = parser.get('Logging', 'log_file')
-            else:
-                log_dir = ''
             if 'Auth' in parser.sections():
                 auth_db = parser.get('Auth', 'auth_db')
                 auth_user = parser.get('Auth', 'auth_user')
@@ -300,11 +296,13 @@ def parse_config():
                 auth_db = ''
                 auth_user = ''
                 auth_pass = ''
+            log_dir = parser.get('Logging', 'log_file')
+            log_level = parser.get('Logging', 'level')
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
             sources = parser.get('URLS', 'sources').split(',')
             pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, sources, pool_size, log_dir, auth_db, auth_user, auth_pass
+            return collection, whitelist, sources, pool_size, log_dir, log_level, auth_db, auth_user, auth_pass
         except Exception, e:
             print 'Problem parsing config file. {}'.format(e)
     else:
@@ -313,10 +311,6 @@ def parse_config():
         parser.read(config_file)
         print 'No config found. Using default.'
         try:
-            if 'Logging' in parser.sections():
-                log_dir = parser.get('Logging', 'log_file')
-            else:
-                log_dir = ''
             if 'Auth' in parser.sections():
                 auth_db = parser.get('Auth', 'auth_db')
                 auth_user = parser.get('Auth', 'auth_user')
@@ -325,21 +319,26 @@ def parse_config():
                 auth_db = ''
                 auth_user = ''
                 auth_pass = ''
+            log_dir = parser.get('Logging', 'log_file')
+            log_level = parser.get('Logging', 'level')
             collection = parser.get('Database', 'collection_list')
             whitelist = parser.get('URLS', 'file')
             sources = parser.get('URLS', 'sources').split(',')
             pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, sources, pool_size, log_dir, auth_db, auth_user, auth_pass
+            return collection, whitelist, sources, pool_size, log_dir, log_level, auth_db, auth_user, auth_pass
         except Exception, e:
             print 'Problem parsing config file. {}'.format(e)
 
 
 if __name__ == '__main__':
     #Get the info from the config
-    db_collection, whitelist_file, sources, pool_size, log_dir, auth_db, auth_user, auth_pass = parse_config()
+    db_collection, whitelist_file, sources, pool_size, log_dir, log_level, auth_db, auth_user, auth_pass = parse_config()
     #Setup the logging
     logger = logging.getLogger('scraper_log')
-    logger.setLevel(logging.INFO)
+    if log_level == 'info':
+        logger.setLevel(logging.INFO)
+    elif log_level == 'warning':
+        logger.setLevel(logging.WARNING)
 
     if log_dir:
         fh = logging.FileHandler(log_dir, 'a')
