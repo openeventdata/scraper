@@ -115,7 +115,7 @@ def parse_results(rss_results, website, db_collection):
 
     for result in rss_results:
 
-        page_url = _convert_url(result.url)
+        page_url = _convert_url(result.url, website)
 
         in_database = _check_mongo(page_url, db_collection)
 
@@ -173,7 +173,7 @@ def _check_mongo(url, db_collection):
     return found
 
 
-def _convert_url(url):
+def _convert_url(url, website):
     """
     Private function to clean a given page URL.
 
@@ -183,6 +183,9 @@ def _convert_url(url):
     url: String.
             URL for the news stories to be scraped.
 
+    website: String.
+                Nickname for the RSS feed being scraped.
+
     Returns
     -------
 
@@ -190,11 +193,20 @@ def _convert_url(url):
                 Cleaned and unicode converted page URL.
     """
 
-    if url == 'xinhua':
+    if website == 'xinhua':
         page_url = url.replace('"', '')
         page_url = page_url.encode('ascii')
-    elif url == 'upi':
+    elif website == 'upi':
         page_url = url.encode('ascii')
+    elif website == 'zaman':
+        #Find the weird thing. They tend to be ap or reuters, but generalized
+        #just in case
+        com = url.find('.com')
+        slash = url[com + 4:].find('/')
+        replaced_url = url.replace(url[com + 4:com + slash + 4], '')
+        split = replaced_url.split('/')
+        #This is nasty and hackish but it gets the jobs done.
+        page_url = '/'.join(['/'.join(split[0:3]), 'world_' + split[-1]])
     else:
         page_url = url.encode('utf-8')
 
