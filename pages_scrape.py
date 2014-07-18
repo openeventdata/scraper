@@ -32,7 +32,11 @@ def scrape(url, extractor):
 
         page = requests.get(url, headers=headers)
         try:
-            article = extractor.extract(raw_html=page.content)
+            try:
+                article = extractor.extract(raw_html=page.content)
+            except UnicodeDecodeError:
+                article = extractor.extract(raw_html=page.content.decode('utf-8',
+                                                                         errors='replace'))
             text = article.cleaned_text
             meta = article.meta_description
             return text, meta
