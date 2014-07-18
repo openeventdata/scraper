@@ -78,8 +78,8 @@ def get_rss(address, website):
     try:
         results = pattern.web.Newsfeed().search(address, count=100,
                                                 cached=False, timeout=30)
-        logger.info('There are {} results from {}'.format(len(results),
-                                                          website))
+        logger.debug('There are {} results from {}'.format(len(results),
+                                                           website))
     except Exception, e:
         print 'There was an error. Check the log file for more information.'
         logger.warning('Problem fetching RSS feed for {}. {}'.format(address,
@@ -127,7 +127,7 @@ def parse_results(rss_results, website, db_collection):
                 logger.warning('Problem obtaining text from URL: {}'.format(page_url))
                 text = ''
         else:
-            logger.info('Result from {} already in database'.format(page_url))
+            logger.debug('Result from {} already in database'.format(page_url))
             text = ''
 
         if text:
@@ -339,6 +339,8 @@ if __name__ == '__main__':
         logger.setLevel(logging.INFO)
     elif log_level == 'warning':
         logger.setLevel(logging.WARNING)
+    elif log_level == 'debug':
+        logger.setLevel(logging.DEBUG)
 
     if log_dir:
         fh = logging.FileHandler(log_dir, 'a')
