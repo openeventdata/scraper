@@ -2,6 +2,7 @@ alakhbar,http://feeds.feedburner.com/AlAkhbarEnglish?format=xml,international
 aljazeera,http://america.aljazeera.com/content/ajam/articles.rss,international
 allafrica,http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf,international
 almonitor,http://www.al-monitor.com/rss,international
+afghanistan_analysts,http://www.afghanistan-analysts.org/feed/,local
 africa_newstime,http://feeds.feedburner.com/NewstimeAfrica?format=xml,international
 ap,http://hosted2.ap.org/atom/APDEFAULT/cae69a7523db45408eeb2b3a98c0c9c5,wire
 asianage_delhi,http://www.asianage.com/rss/40,local
@@ -9,6 +10,9 @@ asianage_india,http://www.asianage.com/rss/38,local
 asianage_int,http://www.asianage.com/rss/37,international
 asianage_mumbai,http://www.asianage.com/rss/42,local
 asiancorrespondent,http://asiancorrespondent.com/feed/,international
+australia_smh_politics,http://www.smh.com.au/rssheadlines/federal-politics/article/rss.xml,international
+australia_smh_world,http://feeds.smh.com.au/rssheadlines/world.xml,international
+australia_smh_national,http://feeds.smh.com.au/rssheadlines/national.xml,international
 austria_voice,http://voiceofvienna.org/?feed=rss2,international
 balkanins,http://www.balkaninsight.com/en/rss/all-balkans-news-latest,international
 baltic_times,http://feeds.feedburner.com/TheBalticTimes?format=xml,local
@@ -63,6 +67,8 @@ bnn_venezuela,http://www.venezuelastar.com/index.php/rss/262fd6adf564928c,intern
 bnn_zimbabwe,http://www.zimbabwestar.com/index.php/rss/4a6d634cbccbbfe2,international
 buenosairesherald,http://www.buenosairesherald.com/articles/rss.aspx,local
 bulatlat,http://feeds.feedburner.com/bulatlat?format=xml,local
+canada_globalnews,http://globalnews.ca/feed/,local
+cbs_world,http://www.cbsnews.com/latest/rss/world,international
 china_scmp_asia,http://www.scmp.com/rss/3/feed,international
 china_scmp_china,http://www.scmp.com/rss/4/feed,international
 china_scmp_hk,http://www.scmp.com/rss/2/feed,international
@@ -72,6 +78,7 @@ chinapost_china,http://www.chinapost.com.tw/rss/china.xml,international
 chinapost_international,http://www.chinapost.com.tw/rss/international.xml,international
 chinapost_taiwan,http://www.chinapost.com.tw/rss/taiwan.xml,international
 chosun,http://english.chosun.com/site/data/rss/rss.xml,international
+croatia_dalje,http://feeds.feedburner.com/daljeenglish,international
 csm_politics,http://rss.csmonitor.com/feeds/politics?format=xml,international
 csm_usa,http://rss.csmonitor.com/feeds/usa?format=xml,international
 csm_world,http://rss.csmonitor.com/feeds/world?format=xml,international
@@ -82,6 +89,7 @@ daily_star_lebanon,http://www.dailystar.com.lb/RSS.aspx?id=1,international
 daily_star_middle_east,http://www.dailystar.com.lb/RSS.aspx?id=102,international
 daily_start_int,http://www.dailystar.com.lb/RSS.aspx?id=113,international
 dawn_pk,http://feeds.feedburner.com/dawn-news,international
+defenseone,http://www.defenseone.com/rss/all/,international
 detriot_fp,http://www.freep.com/apps/pbcs.dll/section?category=news&template=rss&mime=xml,local
 denverpost_top,http://feeds.denverpost.com/dp-news-topstories?format=xml,international
 denverpost_politics,http://feeds.denverpost.com/dp-politics-national_politics?format=xml,international
@@ -146,6 +154,10 @@ india_telegraph_nation,http://www.telegraphindia.com/feeds/rss.jsp?id=4,local
 india_telegraph_nbengal,http://www.telegraphindia.com/feeds/rss.jsp?id=14,local
 india_telegraph_northeast,http://www.telegraphindia.com/feeds/rss.jsp?id=24,local
 india_telegraph_odisha,http://www.telegraphindia.com/feeds/rss.jsp?id=25,local
+india_zee_national,http://zeenews.india.com/rss/india-national-news.xml,local
+india_zee_states,http://zeenews.india.com/rss/india-news.xml,local
+india_zee_world,http://zeenews.india.com/rss/world-news.xml,international
+india_zee_seasia,http://zeenews.india.com/rss/south-asia-news.xml,international
 insight,http://www.insightcrime.org/news/feed,international
 int_the_news_islamabad,http://feeds.feedburner.com/TheNewsInternational-Islamabad?format=xml,local
 int_the_news_karachi,http://feeds.feedburner.com/TheNewsInternational-Karachi?format=xml,local
@@ -171,6 +183,8 @@ ips_me,http://www.ipsnews.net/news/regional-categories/middle-east/,internationa
 ips_namerica,http://www.ipsnews.net/news/regional-categories/north-america/,international
 ips_ss,http://www.ipsnews.net/news/south-south/,international
 ips_world,http://www.ipsnews.net/news/regional-categories/world/,international
+ireland_herald,http://www.herald.ie/rss,local
+ireland_rte,http://www.rte.ie/news/rss/news-headlines.xml,international
 irin,http://www.irinnews.org/irin.xml,international
 japan_times,http://www.japantimes.co.jp/feed/topstories/,local
 jordan_times,http://feeds.feedburner.com/TheJordanTimes-LatestNews?format=xml,international
@@ -181,6 +195,7 @@ jpost_iran,http://www.jpost.com/Rss/RssFeedsIT.aspx,international
 jpost_me,http://www.jpost.com/Rss/RssFeedsMiddleEastNews.aspx,international
 kenya_nation,http://www.nation.co.ke/-/1148/1148/-/view/asFeed/-/vtvnjq/-/index.xml,local
 kyodo,http://english.kyodonews.jp/rss/news.xml,international
+lithuania_tribune,http://www.lithuaniatribune.com/feed/,local
 local_france,http://www.thelocal.fr/feeds/rss.php,local
 local_germany,http://www.thelocal.ch/feeds/rss.php,local
 local_italy,http://www.thelocal.it/feeds/rss.php,local
@@ -198,6 +213,24 @@ malstar_world,http://www.thestar.com.my/RSS/News/World/,international
 malta_independent,http://www.independent.com.mt/rss/news-51118080/,local
 malta_today,http://www.maltatoday.com.mt/rss/,local
 mb,http://www.mb.com.ph/feed/,local
+mcclatchy_econ,http://www.mcclatchydc.com/economy/v-rss/index.rss,international
+mcclatchy_iraq,http://www.mcclatchydc.com/iraq/v-rss/index.rss,international
+mcclatchy_mideast,http://www.mcclatchydc.com/middle-east/v-rss/index.rss,international
+mcclatchy_mexico,http://www.mcclatchydc.com/mexico/v-rss/index.rss,international
+mcclatchy_guantanamo,http://www.mcclatchydc.com/guantanamo/v-rss/index.rss,international
+mcclatchy_europe,http://www.mcclatchydc.com/europe/v-rss/index.rss,international
+mcclatchy_asia,http://www.mcclatchydc.com/asia/v-rss/index.rss,international
+mcclatchy_afpak,http://www.mcclatchydc.com/afghanistan-pakistan/v-rss/index.rss,international
+mcclatchy_whitehouse,http://www.mcclatchydc.com/white-house/v-rss/index.rss,international
+mcclatchy_congress,http://www.mcclatchydc.com/congress/v-rss/index.rss,international
+mcclatchy_state,http://www.mcclatchydc.com/state/v-rss/index.rss,international
+mcclatchy_election,http://www.mcclatchydc.com/election-news/v-rss/index.rss,international
+mcclatchy_politics,http://www.mcclatchydc.com/political-news/v-rss/index.rss,international
+mcclatchy_natsec,http://www.mcclatchydc.com/national-security/v-rss/index.rss,international
+mcclatchy_courtscrime,http://www.mcclatchydc.com/courts-crime/v-rss/index.rss,local
+mcclatchy_nation,http://www.mcclatchydc.com/nation-news/v-rss/index.rss,international
+mcclatchy_syria,http://www.mcclatchydc.com/syria/v-rss/index.rss,international
+mcclatchy_egypt,http://www.mcclatchydc.com/egypt/v-rss/index.rss,international
 menafn_algeria,http://www.menafn.com/rss/menafn_Algeria.xml,international
 menafn_bahrain,http://www.menafn.com/rss/menafn_Bahrain.xml,international
 menafn_egypt,http://www.menafn.com/rss/menafn_Egypt.xml,international
@@ -221,6 +254,7 @@ miami_haiti,http://www.miamiherald.com/news/americas/haiti/index.xml,local
 miami_nation,http://www.miamiherald.com/news/nation/index.xml,local
 miami_politics,http://www.miamiherald.com/news/politics/index.xml,local
 miami_world,http://www.miamiherald.com/news/world/index.xml,international
+middleeasteye,http://www.middleeasteye.net/rss,international
 miltimes_army,http://projects.militarytimes.com/rss-feed/?sitename=Army,international
 miltimes_navy,http://projects.militarytimes.com/rss-feed/?sitename=Navy,international
 minnstartrib_national,http://www.startribune.com/nation/index.rss2,local
@@ -318,6 +352,7 @@ rfa,http://www.rfa.org/english/RSS,wire
 rfe,http://www.rferl.org/api/epiqq,wire
 rfi,http://www.english.rfi.fr/last_24h/rss,wire
 romania_nineoclock,http://www.nineoclock.ro/feed/,local
+russia_interpreter,http://www.interpretermag.com/feed/,local
 russia_stpetersburgtimes,http://feeds.feedburner.com/sptimes?format=xml,local
 sacbee_natworld,http://www.sacbee.com/830/index.rss,international
 sacbee_state,http://www.sacbee.com/state/index.rss,local
@@ -363,6 +398,9 @@ toronto_star_canada,http://www.thestar.com/feeds.articles.news.canada.rss,intern
 uganda_monitor,http://www.monitor.co.ug/-/691150/691150/-/view/asFeed/-/11emxavz/-/index.xml,local
 uganda_newvision_national,http://www.newvision.co.ug/feed.aspx?cat_id=1,local
 uganda_newvision_world,http://www.newvision.co.ug/feed.aspx?cat_id=2,local
+uk_telegraph_world,http://www.telegraph.co.uk/news/worldnews/rss,international
+uk_telegraph_national,http://www.telegraph.co.uk/news/uknews/rss,international
+uk_telegraph_politics,http://www.telegraph.co.uk/news/politics/rss,international
 un_africa,http://www.un.org/apps/news/rss/rss_africa.asp,international
 un_americas,http://www.un.org/apps/news/rss/rss_americas.asp,international
 un_asiapac,http://www.un.org/apps/news/rss/rss_asiapac.asp,international
