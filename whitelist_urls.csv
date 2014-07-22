@@ -1,6 +1,7 @@
 alakhbar,http://feeds.feedburner.com/AlAkhbarEnglish?format=xml,international
 aljazeera,http://america.aljazeera.com/content/ajam/articles.rss,international
 allafrica,http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf,international
+allafrica_somalia,http://allafrica.com/tools/headlines/rdf/somalia/headlines.rdf,international
 almonitor,http://www.al-monitor.com/rss,international
 afghanistan_analysts,http://www.afghanistan-analysts.org/feed/,local
 africa_newstime,http://feeds.feedburner.com/NewstimeAfrica?format=xml,international
@@ -365,6 +366,8 @@ skorea_chosun,http://english.chosun.com/site/data/rss/rss.xml,local
 skorea_hankung_econ,http://rss.hankyung.com/english/latest.xml,local
 skorea_yonhap_nk,http://english.yonhapnews.co.kr/RSS/northkorea.xml,local
 skorea_yonhap_sk,http://english.yonhapnews.co.kr/RSS/headline.xml,local
+somalia_horseed,http://feeds.feedburner.com/horseed?format=xml,local
+somalia_sabahi,http://sabahionline.com/en_GB/rss,local
 southaf_busdaily_nat,http://www.bdlive.co.za/national/?service=rss,local
 southaf_busdaily_world,http://www.bdlive.co.za/world/?service=rss,international
 southaf_capetownt,http://www.iol.co.za/cmlink/1.1046095,local
