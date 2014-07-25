@@ -97,6 +97,7 @@ denverpost_politics,http://feeds.denverpost.com/dp-politics-national_politics?fo
 dw,http://rss.dw.de/rdf/rss-en-all,international
 east_african,http://www.theeastafrican.co.ke/-/2456/2456/-/view/asFeed/-/13blr5d/-/index.xml,local
 egypt_dailynews,http://feeds.feedburner.com/DailyNewsEgypt,local
+egypt_independent,http://www.egyptindependent.com//rss-feed-term/114/rss.xml,international
 euronews,http://feeds.feedburner.com/euronews/en/home?format=xml,international
 euroobs,http://feeds.euobserver.com/rss/9,international
 france24_africa,http://www.france24.com/en/africa/rss,international
@@ -195,6 +196,8 @@ jpost_int,http://www.jpost.com/Rss/RssFeedsInternationalNews.aspx,international
 jpost_iran,http://www.jpost.com/Rss/RssFeedsIT.aspx,international
 jpost_me,http://www.jpost.com/Rss/RssFeedsMiddleEastNews.aspx,international
 kenya_nation,http://www.nation.co.ke/-/1148/1148/-/view/asFeed/-/vtvnjq/-/index.xml,local
+kenya_news24,http://feeds.news24.com/articles/kenya/National/rss,local
+kenya_star,http://www.the-star.co.ke/rss.xml,local
 kyodo,http://english.kyodonews.jp/rss/news.xml,international
 lithuania_tribune,http://www.lithuaniatribune.com/feed/,local
 local_france,http://www.thelocal.fr/feeds/rss.php,local
