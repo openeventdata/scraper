@@ -277,6 +277,7 @@ def call_scrape_func(siteList, db_collection, pool_size, db_auth, db_user,
                                               db_auth, db_user, db_pass))
                for address, website in siteList.iteritems()]
     timeout = [r.get(9999999) for r in results]
+    pool.terminate()
     logger.info('Completed full scrape.')
 
 
