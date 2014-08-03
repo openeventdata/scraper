@@ -1,4 +1,5 @@
 alakhbar,http://feeds.feedburner.com/AlAkhbarEnglish?format=xml,international
+alarabia,http://english.alarabiya.net/.mrss/en.xml,international
 aljazeera,http://america.aljazeera.com/content/ajam/articles.rss,international
 allafrica,http://allafrica.com/tools/headlines/rdf/latest/headlines.rdf,international
 allafrica_somalia,http://allafrica.com/tools/headlines/rdf/somalia/headlines.rdf,international
@@ -6,6 +7,7 @@ almonitor,http://www.al-monitor.com/rss,international
 afghanistan_analysts,http://www.afghanistan-analysts.org/feed/,local
 africa_newstime,http://feeds.feedburner.com/NewstimeAfrica?format=xml,international
 ap,http://hosted2.ap.org/atom/APDEFAULT/cae69a7523db45408eeb2b3a98c0c9c5,wire
+asharq_al_awsat,http://www.aawsat.net/feed,international
 asianage_delhi,http://www.asianage.com/rss/40,local
 asianage_india,http://www.asianage.com/rss/38,local
 asianage_int,http://www.asianage.com/rss/37,international
@@ -198,6 +200,7 @@ jpost_me,http://www.jpost.com/Rss/RssFeedsMiddleEastNews.aspx,international
 kenya_nation,http://www.nation.co.ke/-/1148/1148/-/view/asFeed/-/vtvnjq/-/index.xml,local
 kenya_news24,http://feeds.news24.com/articles/kenya/National/rss,local
 kenya_star,http://www.the-star.co.ke/rss.xml,local
+kosovapress,http://www.kosovapress.com/en/rss/news/?xml=1,local
 kyodo,http://english.kyodonews.jp/rss/news.xml,international
 lithuania_tribune,http://www.lithuaniatribune.com/feed/,local
 local_france,http://www.thelocal.fr/feeds/rss.php,local
@@ -252,6 +255,7 @@ menafn_tunisia,http://www.menafn.com/rss/menafn_Tunisia.xml,international
 menafn_turkey,http://www.menafn.com/rss/menafn_Turkey.xml,international
 menafn_uae,http://www.menafn.com/rss/menafn_UAE.xml,international
 menafn_yemen,http://www.menafn.com/rss/menafn_Yemen.xml,international
+mercopress,http://en.mercopress.com/rss/,international
 miami_americas,http://www.miamiherald.com/news/americas/index.xml,local
 miami_cuba,http://www.miamiherald.com/news/americas/cuba/index.xml,local
 miami_haiti,http://www.miamiherald.com/news/americas/haiti/index.xml,local
@@ -360,6 +364,7 @@ russia_interpreter,http://www.interpretermag.com/feed/,local
 russia_stpetersburgtimes,http://feeds.feedburner.com/sptimes?format=xml,local
 sacbee_natworld,http://www.sacbee.com/830/index.rss,international
 sacbee_state,http://www.sacbee.com/state/index.rss,local
+seurtimes,http://www.setimes.com/cocoon/setimes/rss/en_GB/setimes.rss,international
 sfgate_bayarea,http://www.sfgate.com/bayarea/feed/Bay-Area-News-429.php,local
 sfgate_national,http://www.sfgate.com/rss/feed/National-News-RSS-Feed-435.php,international
 sfgate_world,http://www.sfgate.com/rss/feed/World-News-From-SFGate-432.php,international
@@ -401,6 +406,11 @@ tolo,http://www.tolonews.com/en/component/ninjarsssyndicator/?feed_id=1&format=r
 toronto_star_top,http://www.thestar.com/feeds.topstories.rss,international
 toronto_star_world,http://www.thestar.com/feeds.articles.news.world.rss,international
 toronto_star_canada,http://www.thestar.com/feeds.articles.news.canada.rss,international
+transitions_centraleurope,http://www.tol.org/client/region/1-central-europe-baltics.rss,international
+transitions_easterneurope,http://www.tol.org/client/region/2-eastern-europe-russia.rss,international
+transitions_southeasteurope,http://www.tol.org/client/region/3-southeastern-europe.rss,international
+transitions_centralasia,http://www.tol.org/client/region/4-central-asia.rss,international
+transitions_caucasus,http://www.tol.org/client/region/5-caucasus.rss,international
 uganda_monitor,http://www.monitor.co.ug/-/691150/691150/-/view/asFeed/-/11emxavz/-/index.xml,local
 uganda_newvision_national,http://www.newvision.co.ug/feed.aspx?cat_id=1,local
 uganda_newvision_world,http://www.newvision.co.ug/feed.aspx?cat_id=2,local
