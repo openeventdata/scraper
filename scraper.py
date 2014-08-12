@@ -11,7 +11,7 @@ from ConfigParser import ConfigParser
 from multiprocessing import Pool
 
 
-def scrape_func(website, address, COLL, db_auth, db_user, db_pass):
+def scrape_func(website, lang, address, COLL, db_auth, db_user, db_pass):
     """
     Function to scrape various RSS feeds.
 
@@ -48,7 +48,7 @@ def scrape_func(website, address, COLL, db_auth, db_user, db_pass):
 
     #Pursue each link in the feed
     if results:
-        parse_results(results, website, collection)
+        parse_results(results, website, lang, collection)
 
     logger.info('Scrape of {} finished'.format(website))
 
@@ -89,7 +89,7 @@ def get_rss(address, website):
     return results
 
 
-def parse_results(rss_results, website, db_collection):
+def parse_results(rss_results, website, lang, db_collection):
     """
     Function to parse the links drawn from an RSS feed.
 
@@ -109,9 +109,16 @@ def parse_results(rss_results, website, db_collection):
                         Collection within MongoDB that in which results are
                         stored.
     """
-    goose_extractor = Goose({'use_meta_language': False,
-                             'target_language': 'en',
-                             'enable_image_fetching': False})
+    if lang == 'english':
+        goose_extractor = Goose({'use_meta_language': False,
+                                 'target_language': 'en',
+                                 'enable_image_fetching': False})
+    elif lang == 'arabic':
+        from goose.text import StopWordsArabic
+        goose_extractor = Goose({'stopwords_class': StopWordsArabic,
+                                 'enable_image_fetching': False})
+    else:
+        print(lang)
 
     for result in rss_results:
 
@@ -135,7 +142,7 @@ def parse_results(rss_results, website, db_collection):
 
             entry_id = mongo_connection.add_entry(db_collection, cleaned_text,
                                                   result.title, result.url,
-                                                  result.date, website)
+                                                  result.date, website, lang)
             if entry_id:
                 try:
                     logger.info('Added entry from {} with id {}'.format(page_url,
@@ -273,9 +280,10 @@ def call_scrape_func(siteList, db_collection, pool_size, db_auth, db_user,
                 Number of processes to distribute work
     """
     pool = Pool(pool_size)
-    results = [pool.apply_async(scrape_func, (address, website, db_collection,
-                                              db_auth, db_user, db_pass))
-               for address, website in siteList.iteritems()]
+    results = [pool.apply_async(scrape_func, (address, lang, website,
+                                              db_collection, db_auth, db_user,
+                                              db_pass))
+               for address, (website, lang) in siteList.iteritems()]
     timeout = [r.get(9999999) for r in results]
     pool.terminate()
     logger.info('Completed full scrape.')
@@ -358,12 +366,15 @@ if __name__ == '__main__':
     #Convert from CSV of URLs to a dictionary
     try:
         url_whitelist = open(whitelist_file, 'r').readlines()
-        url_whitelist = [line.replace('\n', '').split(',') for line in url_whitelist if line]
+        url_whitelist = [line.replace('\n', '').split(',') for line in
+                         url_whitelist if line]
         #Filtering based on list of sources from the config file
-        to_scrape = {listing[0]: listing[1] for listing in url_whitelist if listing[2] in sources}
+        to_scrape = {listing[0]: [listing[1], listing[3]] for listing in
+                     url_whitelist if listing[2] in sources}
     except IOError:
         print 'There was an error. Check the log file for more information.'
         logger.warning('Could not open URL whitelist file.')
 
     call_scrape_func(to_scrape, db_collection, pool_size, auth_db, auth_user,
                      auth_pass)
+    logger.info('All done.')

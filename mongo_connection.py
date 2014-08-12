@@ -1,7 +1,7 @@
 import datetime
 
 
-def add_entry(collection, text, title, url, date, website):
+def add_entry(collection, text, title, url, date, website, lang):
     """
     Function that creates the dictionary of content to add to a MongoDB
     instance, checks whether a given URL is already in the database, and
@@ -39,6 +39,7 @@ def add_entry(collection, text, title, url, date, website):
                 "date": date,
                 "date_added": datetime.datetime.utcnow(),
                 "content": text,
-                "stanford": 0}
+                "stanford": 0,
+                "language": lang}
     object_id = collection.insert(toInsert)
     return object_id
