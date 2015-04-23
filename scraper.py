@@ -11,7 +11,7 @@ from ConfigParser import ConfigParser
 from multiprocessing import Pool
 
 
-def scrape_func(website, lang, address, COLL, db_auth, db_user, db_pass):
+def scrape_func(website, lang, address, COLL, db_auth, db_user, db_pass, db_host=None):
     """
     Function to scrape various RSS feeds.
 
@@ -36,17 +36,17 @@ def scrape_func(website, lang, address, COLL, db_auth, db_user, db_pass):
     db_user: String.
                 Password for MongoDB authentication.
     """
-    #Setup the database
-    connection = MongoClient()
+    # Setup the database
+    connection = MongoClient(host=db_host)
     if db_auth:
         connection[db_auth].authenticate(db_user, db_pass)
     db = connection.event_scrape
     collection = db[COLL]
 
-    #Scrape the RSS feed
+    # Scrape the RSS feed
     results = get_rss(address, website)
 
-    #Pursue each link in the feed
+    # Pursue each link in the feed
     if results:
         parse_results(results, website, lang, collection)
 
@@ -115,6 +115,7 @@ def parse_results(rss_results, website, lang, db_collection):
                                  'enable_image_fetching': False})
     elif lang == 'arabic':
         from goose.text import StopWordsArabic
+
         goose_extractor = Goose({'stopwords_class': StopWordsArabic,
                                  'enable_image_fetching': False})
     else:
@@ -206,13 +207,13 @@ def _convert_url(url, website):
     elif website == 'upi':
         page_url = url.encode('ascii')
     elif website == 'zaman':
-        #Find the weird thing. They tend to be ap or reuters, but generalized
-        #just in case
+        # Find the weird thing. They tend to be ap or reuters, but generalized
+        # just in case
         com = url.find('.com')
         slash = url[com + 4:].find('/')
         replaced_url = url.replace(url[com + 4:com + slash + 4], '')
         split = replaced_url.split('/')
-        #This is nasty and hackish but it gets the jobs done.
+        # This is nasty and hackish but it gets the jobs done.
         page_url = '/'.join(['/'.join(split[0:3]), 'world_' + split[-1]])
     else:
         page_url = url.encode('utf-8')
@@ -248,13 +249,32 @@ def _clean_text(text, website):
                  'menafn_uae', 'menafn_yemen']
 
     if website == 'bbc':
-        text = text.replace("This page is best viewed in an up-to-date web browser with style sheets (CSS) enabled. While you will be able to view the content of this page in your current browser, you will not be able to get the full visual experience. Please consider upgrading your browser software or enabling style sheets (CSS) if you are able to do so.", '')
+        text = text.replace(
+            "This page is best viewed in an up-to-date web browser with style sheets (CSS) "
+            "enabled. While you will be able to view the content of this page in your current "
+            "browser, you will not be able to get the full visual experience. Please consider "
+            "upgrading your browser software or enabling style sheets (CSS) if you are able to do "
+            "so.",
+            '')
     if website == 'almonitor':
         text = re.sub("^.*?\(photo by REUTERS.*?\)", "", text)
     if website in site_list:
         text = re.sub("^\(.*?MENAFN.*?\)", "", text)
     elif website == 'upi':
-        text = text.replace("Since 1907, United Press International (UPI) has been a leading provider of critical information to media outlets, businesses, governments and researchers worldwide. UPI is a global operation with offices in Beirut, Hong Kong, London, Santiago, Seoul and Tokyo. Our headquarters is located in downtown Washington, DC, surrounded by major international policy-making governmental and non-governmental organizations. UPI licenses content directly to print outlets, online media and institutions of all types. In addition, UPI's distribution partners provide our content to thousands of businesses, policy groups and academic institutions worldwide. Our audience consists of millions of decision-makers who depend on UPI's insightful and analytical stories to make better business or policy decisions. In the year of our 107th anniversary, our company strives to continue being a leading and trusted source for news, analysis and insight for readers around the world.", '')
+        text = text.replace(
+            "Since 1907, United Press International (UPI) has been a leading provider of critical "
+            "information to media outlets, businesses, governments and researchers worldwide. UPI "
+            "is a global operation with offices in Beirut, Hong Kong, London, Santiago, Seoul and "
+            "Tokyo. Our headquarters is located in downtown Washington, DC, surrounded by major "
+            "international policy-making governmental and non-governmental organizations. UPI "
+            "licenses content directly to print outlets, online media and institutions of all "
+            "types. In addition, UPI's distribution partners provide our content to thousands of "
+            "businesses, policy groups and academic institutions worldwide. Our audience consists "
+            "of millions of decision-makers who depend on UPI's insightful and analytical stories "
+            "to make better business or policy decisions. In the year of our 107th anniversary, "
+            "our company strives to continue being a leading and trusted source for news, "
+            "analysis and insight for readers around the world.",
+            '')
 
     text = text.replace('\n', ' ')
 
@@ -262,7 +282,7 @@ def _clean_text(text, website):
 
 
 def call_scrape_func(siteList, db_collection, pool_size, db_auth, db_user,
-                     db_pass):
+                     db_pass, db_host=None):
     """
     Helper function to iterate over a list of RSS feeds and scrape each.
 
@@ -282,11 +302,37 @@ def call_scrape_func(siteList, db_collection, pool_size, db_auth, db_user,
     pool = Pool(pool_size)
     results = [pool.apply_async(scrape_func, (address, lang, website,
                                               db_collection, db_auth, db_user,
-                                              db_pass))
+                                              db_pass, db_host))
                for address, (website, lang) in siteList.iteritems()]
-    timeout = [r.get(9999999) for r in results]
+    [r.get(9999999) for r in results]
     pool.terminate()
     logger.info('Completed full scrape.')
+
+
+def _parse_config(parser):
+    try:
+        if 'Auth' in parser.sections():
+            auth_db = parser.get('Auth', 'auth_db')
+            auth_user = parser.get('Auth', 'auth_user')
+            auth_pass = parser.get('Auth', 'auth_pass')
+            db_host = parser.get('Auth', 'db_host')
+        else:
+            # Try env vars too
+            auth_db = os.getenv('MONGO_AUTH_DB') or ''
+            auth_user = os.getenv('MONGO_AUTH_USER') or ''
+            auth_pass = os.getenv('MONGO_AUTH_PASS') or ''
+            db_host = os.getenv('MONGO_HOST') or ''
+
+        log_dir = parser.get('Logging', 'log_file')
+        log_level = parser.get('Logging', 'level')
+        collection = parser.get('Database', 'collection_list')
+        whitelist = parser.get('URLS', 'file')
+        sources = parser.get('URLS', 'sources').split(',')
+        pool_size = int(parser.get('Processes', 'pool_size'))
+        return collection, whitelist, sources, pool_size, log_dir, log_level, auth_db, auth_user, \
+               auth_pass, db_host
+    except Exception, e:
+        print 'Problem parsing config file. {}'.format(e)
 
 
 def parse_config():
@@ -294,55 +340,19 @@ def parse_config():
     config_file = glob.glob('config.ini')
     parser = ConfigParser()
     if config_file:
-        print 'Found a config file in working directory'
         parser.read(config_file)
-        try:
-            if 'Auth' in parser.sections():
-                auth_db = parser.get('Auth', 'auth_db')
-                auth_user = parser.get('Auth', 'auth_user')
-                auth_pass = parser.get('Auth', 'auth_pass')
-            else:
-                auth_db = ''
-                auth_user = ''
-                auth_pass = ''
-            log_dir = parser.get('Logging', 'log_file')
-            log_level = parser.get('Logging', 'level')
-            collection = parser.get('Database', 'collection_list')
-            whitelist = parser.get('URLS', 'file')
-            sources = parser.get('URLS', 'sources').split(',')
-            pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, sources, pool_size, log_dir, log_level, auth_db, auth_user, auth_pass
-        except Exception, e:
-            print 'Problem parsing config file. {}'.format(e)
     else:
         cwd = os.path.abspath(os.path.dirname(__file__))
         config_file = os.path.join(cwd, 'default_config.ini')
         parser.read(config_file)
-        print 'No config found. Using default.'
-        try:
-            if 'Auth' in parser.sections():
-                auth_db = parser.get('Auth', 'auth_db')
-                auth_user = parser.get('Auth', 'auth_user')
-                auth_pass = parser.get('Auth', 'auth_pass')
-            else:
-                auth_db = ''
-                auth_user = ''
-                auth_pass = ''
-            log_dir = parser.get('Logging', 'log_file')
-            log_level = parser.get('Logging', 'level')
-            collection = parser.get('Database', 'collection_list')
-            whitelist = parser.get('URLS', 'file')
-            sources = parser.get('URLS', 'sources').split(',')
-            pool_size = int(parser.get('Processes', 'pool_size'))
-            return collection, whitelist, sources, pool_size, log_dir, log_level, auth_db, auth_user, auth_pass
-        except Exception, e:
-            print 'Problem parsing config file. {}'.format(e)
+    return _parse_config(parser)
 
 
 if __name__ == '__main__':
-    #Get the info from the config
-    db_collection, whitelist_file, sources, pool_size, log_dir, log_level, auth_db, auth_user, auth_pass = parse_config()
-    #Setup the logging
+    # Get the info from the config
+    db_collection, whitelist_file, sources, pool_size, log_dir, log_level, auth_db, auth_user, \
+    auth_pass, db_host = parse_config()
+    # Setup the logging
     logger = logging.getLogger('scraper_log')
     if log_level == 'info':
         logger.setLevel(logging.INFO)
@@ -363,18 +373,19 @@ if __name__ == '__main__':
 
     print 'Running. See log file for further information.'
 
-    #Convert from CSV of URLs to a dictionary
+    # Convert from CSV of URLs to a dictionary
     try:
         url_whitelist = open(whitelist_file, 'r').readlines()
         url_whitelist = [line.replace('\n', '').split(',') for line in
                          url_whitelist if line]
-        #Filtering based on list of sources from the config file
+        # Filtering based on list of sources from the config file
         to_scrape = {listing[0]: [listing[1], listing[3]] for listing in
                      url_whitelist if listing[2] in sources}
     except IOError:
         print 'There was an error. Check the log file for more information.'
         logger.warning('Could not open URL whitelist file.')
+        raise
 
     call_scrape_func(to_scrape, db_collection, pool_size, auth_db, auth_user,
-                     auth_pass)
+                     auth_pass, db_host=db_host)
     logger.info('All done.')
