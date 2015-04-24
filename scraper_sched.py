@@ -5,5 +5,5 @@ from apscheduler.triggers.cron import CronTrigger
 
 if __name__ == '__main__':
     scheduler = BlockingScheduler()
-    scheduler.add_job(run_scraper, CronTrigger(hour=0))
+    scheduler.add_job(run_scraper, CronTrigger(minute=0))
     scheduler.start()
