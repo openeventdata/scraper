@@ -10,6 +10,9 @@ from pymongo import MongoClient
 from ConfigParser import ConfigParser
 from multiprocessing import Pool
 
+# Initialize Logger
+logger = None
+
 
 def scrape_func(website, lang, address, COLL, db_auth, db_user, db_pass, db_host=None):
     """
@@ -37,7 +40,10 @@ def scrape_func(website, lang, address, COLL, db_auth, db_user, db_pass, db_host
                 Password for MongoDB authentication.
     """
     # Setup the database
-    connection = MongoClient(host=db_host)
+    if db_host:
+        connection = MongoClient(host=db_host)
+    else:
+        connection = MongoClient()
     if db_auth:
         connection[db_auth].authenticate(db_user, db_pass)
     db = connection.event_scrape
@@ -348,7 +354,8 @@ def parse_config():
     return _parse_config(parser)
 
 
-if __name__ == '__main__':
+def run_scraper():
+    global logger
     # Get the info from the config
     db_collection, whitelist_file, sources, pool_size, log_dir, log_level, auth_db, auth_user, \
     auth_pass, db_host = parse_config()
@@ -389,3 +396,7 @@ if __name__ == '__main__':
     call_scrape_func(to_scrape, db_collection, pool_size, auth_db, auth_user,
                      auth_pass, db_host=db_host)
     logger.info('All done.')
+
+
+if __name__ == '__main__':
+    run_scraper()
