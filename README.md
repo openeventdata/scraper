@@ -1,6 +1,8 @@
 scraper
 =======
 
+[![Join the chat at https://gitter.im/openeventdata/scraper](https://badges.gitter.im/openeventdata/scraper.svg)](https://gitter.im/openeventdata/scraper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Scrapes sites. Gets news. Eventually events.
 
 More information can be found in the
